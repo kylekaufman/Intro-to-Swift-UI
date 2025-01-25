@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Intro to Swift UI
 //
-//  Created by Kyle Kaufman on 1/23/25.
+//  Created by Kyle Kaufman and Emmanuel Makoye on 1/23/25.
 //
 
 import SwiftUI
