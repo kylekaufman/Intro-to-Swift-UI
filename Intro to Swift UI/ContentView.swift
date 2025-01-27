@@ -21,18 +21,40 @@ struct Message: Identifiable {
 
 struct MessageView: View {
     var message: Message
+    // Date formatter to display the date in a readable format
+       private var dateFormatter: DateFormatter {
+           let formatter = DateFormatter()
+           formatter.dateStyle = .short
+           formatter.timeStyle = .short
+           return formatter
+       }
+    
     var body: some View {
-        Text(message.message)
-            .padding(10)
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(15)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.leading, 50)
-            .padding(.horizontal)
-            .padding(.vertical, 5)
-    }
-}
+           VStack(alignment: .trailing) {
+               // Message text
+               Section {
+                   Text(message.message)
+                       .padding(10)
+                       .background(Color.blue)
+                       .foregroundColor(.white)
+                       .cornerRadius(15)
+                       .frame(maxWidth: .infinity, alignment: .trailing)
+                       .padding(.leading, 50)
+                       .padding(.horizontal)
+                       .padding(.vertical, 5)
+               }
+
+               // Date and Time
+               Section {
+                   Text(dateFormatter.string(from: message.date))
+                       .font(.footnote)
+                       .foregroundColor(.gray)
+                       .padding(.top, 2)
+                       .padding(.trailing, 15)
+               }
+           }
+       }
+   }
 
 struct ContentView: View {
     @State var messages = [Message]()
