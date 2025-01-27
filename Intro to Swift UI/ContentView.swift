@@ -21,13 +21,20 @@ struct Message: Identifiable {
 
 struct MessageView: View {
     var message: Message
-    // Date formatter to display the date in a readable format
-       private var dateFormatter: DateFormatter {
-           let formatter = DateFormatter()
-           formatter.dateStyle = .short
-           formatter.timeStyle = .short
-           return formatter
-       }
+    // Date formatter function
+    
+    func getDateFormat(_ date: Date) -> String {
+        // Create a DateFormatter instance
+        let dateFormatter = DateFormatter()
+        
+        //apply styling
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        // Return the formatted date string
+        return dateFormatter.string(from: date)
+    }
+      
     
     var body: some View {
            VStack(alignment: .trailing) {
@@ -46,7 +53,7 @@ struct MessageView: View {
 
                // Date and Time
                Section {
-                   Text(dateFormatter.string(from: message.date))
+                   Text(getDateFormat(message.date))
                        .font(.footnote)
                        .foregroundColor(.gray)
                        .padding(.top, 2)
